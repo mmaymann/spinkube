@@ -1,3 +1,4 @@
+#!/bin/bash
 # Delete default k3d cluster
 k3d cluster stop k3s-default
 k3d cluster delete k3s-default
