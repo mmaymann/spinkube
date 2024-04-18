@@ -17,10 +17,11 @@ kubectl apply -f https://github.com/spinkube/spin-operator/releases/download/v0.
 # Run sample app
 kubectl apply -f https://raw.githubusercontent.com/spinkube/spin-operator/main/config/samples/simple.yaml
 
-# Create typescript app
+# Install spin
 # https://www.typescripttutorial.net/typescript-tutorial/typescript-hello-world/
 # https://developer.fermyon.com/wasm-languages/typescript
 # https://www.fermyon.com/blog/spin-js-sdk
+# https://www.youtube.com/watch?v=435WOVEl4ww
 sudo apt install -y node-typescript npm spin
 curl -fsSL https://developer.fermyon.com/downloads/install.sh | bash
 sudo mv spin /usr/local/bin/
@@ -28,6 +29,7 @@ spin plugins update
 spin plugins install pluginify --yes
 spin plugins install kube --yes
 
+# Create typescript app
 spin new -t http-js typescript -a
 cd typescript
 echo "" > index.html
