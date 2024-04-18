@@ -21,6 +21,28 @@ kubectl apply -f https://raw.githubusercontent.com/spinkube/spin-operator/main/c
 # https://www.typescripttutorial.net/typescript-tutorial/typescript-hello-world/
 # https://developer.fermyon.com/wasm-languages/typescript
 # https://www.fermyon.com/blog/spin-js-sdk
+sudo apt install -y node-typescript npm spin
+curl -fsSL https://developer.fermyon.com/downloads/install.sh | bash
+sudo mv spin /usr/local/bin/
+spin plugins update
+spin plugins install pluginify --yes
+spin plugins install kube --yes
+
+spin new -t http-js typescript -a
+cd typescript
+echo "" > index.html
+npm install
+spin build
+spin registry push ttl.sh/typescript-maymann:1h
+spin kube scaffold -f ttl.sh/typescript-maymann:1h > app.yaml
+kubectl apply -f app.yaml
+
+#spin templates install --git https://github.com/fermyon/spin --upgrade
+#spin templates install --git https://github.com/fermyon/spin-js-sdk --upgrade
+#spin plugins update
+#cd javascript-example
+#npm install
+#npm run build
 
 # Create .NET app
 # https://developer.fermyon.com/wasm-languages/c-sharp
