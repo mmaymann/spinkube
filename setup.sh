@@ -15,4 +15,6 @@ kubectl apply -f https://github.com/spinkube/spin-operator/releases/download/v0.
 # Run sample app
 kubectl apply -f https://raw.githubusercontent.com/spinkube/spin-operator/main/config/samples/simple.yaml
 
-#  typescript app
+# Create typescript app
+
+# Create ASP.net app
