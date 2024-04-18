@@ -14,8 +14,6 @@ kubectl apply -f https://github.com/spinkube/spin-operator/releases/download/v0.
 
 # Run sample app
 kubectl apply -f https://raw.githubusercontent.com/spinkube/spin-operator/main/config/samples/simple.yaml
-kubectl port-forward svc/simple-spinapp 8083:80
-echo "start split terminal and run: >curl localhost:8083/hello<"
 
-# Run C++ app
+#  typescript app
 ###
