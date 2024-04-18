@@ -18,5 +18,9 @@ kubectl apply -f https://github.com/spinkube/spin-operator/releases/download/v0.
 kubectl apply -f https://raw.githubusercontent.com/spinkube/spin-operator/main/config/samples/simple.yaml
 
 # Create typescript app
+# https://www.typescripttutorial.net/typescript-tutorial/typescript-hello-world/
+# https://developer.fermyon.com/wasm-languages/typescript
+# https://www.fermyon.com/blog/spin-js-sdk
 
 # Create .NET app
+# https://developer.fermyon.com/wasm-languages/c-sharp
