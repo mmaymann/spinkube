@@ -18,4 +18,4 @@ kubectl apply -f https://raw.githubusercontent.com/spinkube/spin-operator/main/c
 
 # Create typescript app
 
-# Create ASP.net app
+# Create .NET app
