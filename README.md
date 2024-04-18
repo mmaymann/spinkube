@@ -1,7 +1,7 @@
 # Spinkube
 
 ## Run initially
-chmod +x setup.sh
+chmod +x setup.sh<br>
 ./setup.sh
 
 ## Run after starting Codespace
