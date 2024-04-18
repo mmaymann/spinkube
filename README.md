@@ -1,8 +1,8 @@
 # Spinkube
 
 ## Run after starting Codespace
-k3d cluster start wasm-cluster
-kubectl port-forward svc/simple-spinapp 8083:80
+k3d cluster start wasm-cluster<br>
+kubectl port-forward svc/simple-spinapp 8083:80<br>
 echo "start split terminal and run: >curl localhost:8083/hello<"
 
 ## Run before stopping Codespace
