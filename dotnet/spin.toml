@@ -11,7 +11,7 @@ route = "/..."
 component = "dotnet"
 
 [component.dotnet]
-source = "bin/Debug/net8.0/wasi-wasm/dotnet.wasm"
-#exclude_files = ["**/node_modules"]
+source = "bin/Release/net8.0/wasi-wasm/dotnet.wasm"
+allowed_outbound_hosts = ["http://localhost:3000"]
 [component.dotnet.build]
 command = "dotnet build -c Release"
