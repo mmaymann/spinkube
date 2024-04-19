@@ -27,24 +27,76 @@ curl -fsSL https://developer.fermyon.com/downloads/install.sh | bash
 sudo mv spin /usr/local/bin/
 spin plugins update
 spin plugins install pluginify --yes
+spin plugins install js2wasm --yes
 spin plugins install kube --yes
 
 # Create typescript app
 spin new -t http-js typescript -a
 cd typescript
-echo "" > index.html
+tee -a index.js << END
+export async function handleRequest(request) {
+
+    console.log('Handling request ${JSON.stringify(request)}')
+
+    return {
+        status: 200,
+        headers: { "content-type": "text/plain" },
+        body: "Hello, Typescript"
+    }
+}
+END
 npm install
 spin build
 spin registry push ttl.sh/typescript-maymann:1h
-spin kube scaffold -f ttl.sh/typescript-maymann:1h > app.yaml
-kubectl apply -f app.yaml
+spin kube scaffold -f ttl.sh/typescript-maymann:1h > typescript.yaml
+kubectl apply -f typescript.yaml
+cd ..
 
-#spin templates install --git https://github.com/fermyon/spin --upgrade
-#spin templates install --git https://github.com/fermyon/spin-js-sdk --upgrade
-#spin plugins update
-#cd javascript-example
-#npm install
-#npm run build
+# Install .NET
+# https://developer.fermyon.com/wasm-languages/c-sharp
+curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
+sudo /tmp/nodesource_setup.sh
+sudo apt install -y dotnet-sdk-8.0 cargo nodejs
+cargo install wizer --all-features
+sudo dotnet workload install wasi-experimental
+curl https://wasmtime.dev/install.sh -sSf | bash
 
 # Create .NET app
-# https://developer.fermyon.com/wasm-languages/c-sharp
+mkdir dotnet
+cd dotnet
+dotnet new wasiconsole
+dotnet build
+tee -a spin.toml << END
+spin_version = "1"
+name = "spin-test"
+trigger = { type = "http", base = "/" }
+version = "1.0.0"
+
+[[component]]
+id = "spin-page"
+source = "bin/Debug/net8.0/wasi-wasm/dotnet.wasm"
+[component.trigger]
+route = "/"
+executor = { type = "wagi" }
+END
+spin build
+spin registry push ttl.sh/dotnet-maymann:1h
+spin kube scaffold -f ttl.sh/dotnet-maymann:1h > dotnet.yaml
+kubectl apply -f dotnet.yaml
+
+#git clone https://github.com/fermyon/spin-dotnet-sdk
+#cd spin-dotnet-sdk/samples/helloworld
+cd ..
+
+# Build WASI SDK
+mkdir wasi-sdk
+cd wasi-sdk
+git clone https://github.com/SteveSandersonMS/dotnet-wasi-sdk
+cd dotnet-wasi-sdk
+git submodule update --init --recursive
+sudo apt-get install -y build-essential cmake ninja-build python python3 zlib1g-dev
+cd modules/runtime/src/mono/wasm
+make provision-wasm
+make build-all
+cd ../wasi
+make

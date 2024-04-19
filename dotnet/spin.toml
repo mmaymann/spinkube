@@ -1,0 +1,17 @@
+spin_manifest_version = 2
+
+[application]
+authors = ["Michael Maymann <112947113+mmaymann@users.noreply.github.com>"]
+description = ""
+name = "dotnet"
+version = "0.1.0"
+
+[[trigger.http]]
+route = "/..."
+component = "dotnet"
+
+[component.dotnet]
+source = "bin/Debug/net8.0/wasi-wasm/dotnet.wasm"
+#exclude_files = ["**/node_modules"]
+[component.dotnet.build]
+command = "dotnet build -c Release"
