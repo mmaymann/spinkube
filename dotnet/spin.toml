@@ -2,8 +2,8 @@ spin_manifest_version = 2
 
 [application]
 authors = ["Michael Maymann <112947113+mmaymann@users.noreply.github.com>"]
-name = "dotnet"
 description = ""
+name = "dotnet"
 version = "0.1.0"
 
 [[trigger.http]]
