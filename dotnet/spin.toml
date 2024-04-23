@@ -1,17 +1,15 @@
 spin_manifest_version = 2
 
 [application]
-authors = ["Michael Maymann <m@maymann.com>"]
-description = ""
-name = "dotnet"
+name = "command-sample"
 version = "0.1.0"
 
-[[trigger.http]]
-route = "/..."
-component = "dotnet"
+[[trigger.command]]
+component = "hiwasi"
 
-[component.dotnet]
-source = "bin/Release/net8.0/wasi-wasm/dotnet.wasm"
-allowed_outbound_hosts = ["http://localhost:3000"]
-[component.dotnet.build]
-command = "dotnet build -c Release"
+[component.hiwasi]
+source = "csharpwasi.wasm"
+# you can now add files, allowed network hosts,
+# use the key/value feature.
+[component.hiwasi.build]
+command = "dotnet build"

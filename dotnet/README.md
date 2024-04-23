@@ -1,25 +1,11 @@
-## .NET WASI app
+## .NET WASI Application running with Spin's trigger command
 
-## Build
-
-You can build the app from Visual Studio or from the command-line:
-
-```
-dotnet build -c Debug/Release
-```
-
-After building the app, the result is in the `bin/$(Configuration)/net8.0/wasi-wasm/AppBundle` directory.
-
-## Run
-
-You can build the app from Visual Studio or the command-line:
+This is an experimental application running a .NET C# application
+to completion using [Spin's new command trigger](https://github.com/fermyon/spin-trigger-command).
 
 ```
-dotnet run -c Debug/Release
+$ spin up
+Logging component stdio to ".spin/logs/"
+Hello, Wasi Console!
 ```
 
-Or directly start node from the AppBundle directory:
-
-```
-wasmtime bin/$(Configuration)/net8.0/browser-wasm/AppBundle/dotnet.wasm
-```

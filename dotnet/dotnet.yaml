@@ -1,8 +1,0 @@
-apiVersion: core.spinoperator.dev/v1alpha1
-kind: SpinApp
-metadata:
-  name: dotnet-maymann
-spec:
-  image: "ttl.sh/dotnet-maymann:1h"
-  executor: containerd-shim-spin
-  replicas: 1
