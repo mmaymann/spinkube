@@ -29,6 +29,11 @@ spin plugins update
 spin plugins install pluginify --yes
 spin plugins install js2wasm --yes
 spin plugins install kube --yes
+git clone https://github.com/fermyon/spin-trigger-command
+cd https://github.com/fermyon/spin-trigger-command
+cargo build --release
+spin pluginify --install
+cd ..
 
 # Create typescript app
 spin new -t http-js typescript -a
@@ -62,6 +67,18 @@ sudo dotnet workload install wasi-experimental
 curl https://wasmtime.dev/install.sh -sSf | bash
 
 # Create .NET app
+git clone https://github.com/radu-matei/spin-trigger-csharp-test
+mv spin-trigger-csharp-test dotnet
+cd dotnet
+...
+spin build
+spin registry push ttl.sh/dotnet-maymann:1h
+spin kube scaffold -f ttl.sh/dotnet-maymann:1h > dotnet.yaml
+kubectl apply -f dotnet.yaml
+cd ..
+
+
+### Delete everything after this line when we have above working
 mkdir dotnet
 cd dotnet
 dotnet new wasiconsole
